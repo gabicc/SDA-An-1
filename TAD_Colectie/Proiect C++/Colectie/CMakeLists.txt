@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
-add_executable(Colectie
+add_executable(ColectieCMake
         App.cpp
         Colectie.cpp
         Colectie.h

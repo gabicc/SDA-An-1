@@ -6,7 +6,8 @@
 using namespace std;
 
 #define ALPHA 0.8
-#define BETA 0.8
+#define BETA 0.5
+#define INITIAL_CAPACITY 2
 
 Colectie::Colectie() {
 	/* de adaugat */
@@ -56,19 +57,24 @@ bool Colectie::sterge(TElem elem) {
 	int i;
 	for (i = 0; i < this->size; i++) {
 		if (this->values[i].elem == elem) {
+			this->values[i].frecv--;
 			break;
 		}
 	}
 	if (i >= this->size) {
 		return false;
 	}
-	for (int j = i; j < this->size; j++) {
-		this->values[j] = this->values[j + 1];
+	if (this->values[i].frecv == 0) {
+		for (int j = i; j < this->size; j++) {
+			this->values[j] = this->values[j + 1];
+		}
+		this->size--;
+		if (this->size < BETA * this->capacity) {
+			this->resize(capacity / 2);
+		}
 	}
-	this->size--;
-	if (this->size < BETA * this->capacity) {
-		this->resize(capacity / 2);
-	}
+	this->total--;
+	return true;
 }
 
 
@@ -86,23 +92,23 @@ bool Colectie::cauta(TElem elem) const {
 int Colectie::nrAparitii(TElem elem) const {
 	/* de adaugat */
 	//return 0;
-	int cont = 0;
+	/*int cont = 0;
 	for (int i = 0; i < this->size; i++) {
 		if (this->values[i].elem == elem) {
 			cont++;
 		}
 	}
-	return cont;
+	return cont;*/
+	for (int i = 0; i < this->size; i++) {
+		if (this->values[i].elem == elem) {
+			return this->values[i].frecv;
+		}
+	}
+	return 0;
 }
 
 
 int Colectie::dim() const {
-	/* de adaugat */
-	//return 0;
-	/*int sum = 0;
-
-	return this->size;
-	*/
 	return this->total;
 }
 

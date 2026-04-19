@@ -1,8 +1,30 @@
 #pragma once
+#include <exception>
+#include <string>
 #include "Colectie.h"
 
 class Colectie;
 typedef int TElem;
+
+using namespace std;
+
+class IteratorException : public exception {
+private:
+	string message;
+public:
+	// Constructor
+	IteratorException(string msg) : message(msg) {}
+
+	// Override what() method
+	const char* what() const noexcept override {
+		return message.c_str();
+	}
+
+	// Optional: method to get the invalid value
+	string getValue() const {
+		return message;
+	}
+};
 
 class IteratorColectie
 {
@@ -15,8 +37,9 @@ private:
     //contine o referinta catre containerul pe care il itereaza
 	const Colectie& col;
 	/* aici e reprezentarea pecifica a iteratorului*/
-	int poz;
-	int aparitii;
+	//int poz;
+	int index;
+	int poz_freq;
 
 public:
 

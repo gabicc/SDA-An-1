@@ -1,31 +1,48 @@
 #include "IteratorColectie.h"
-#include "Colectie.h"
 
+#include <exception>
+
+#include "Colectie.h"
+#include <iostream>
+
+using namespace std;
 
 IteratorColectie::IteratorColectie(const Colectie& c): col(c) {
-	/* de adaugat */
-	this->poz = 0;
-	this->aparitii = 0;
+	this->index = 0;
+	this->poz_freq = 0;
 }
 
 void IteratorColectie::prim() {
-	/* de adaugat */
+	this->index = 0;
+	this->poz_freq = 0;
 }
 
 
 void IteratorColectie::urmator() {
-	/* de adaugat */
+	if (this->valid()) {
+		if (this->poz_freq == this->col.values[this->index].frecv - 1) {
+			this->index++;
+			this->poz_freq = 0;
+		}
+		else
+			this->poz_freq++;
+	}
+	else {
+		throw IteratorException("Invalid position for the next element");
+	}
 }
 
 
 bool IteratorColectie::valid() const {
-	/* de adaugat */
-	return this->poz < this->col.size;
+	if (this->index >= this->col.size || this->poz_freq >= this->col.values[this->index].frecv)
+		return false;
+	return true;
 }
 
 
 
 TElem IteratorColectie::element() const {
-	/* de adaugat */
-	return -1;
+	if (this->valid())
+		return this->col.values[this->index].elem;
+	throw IteratorException("Invalid position to return");
 }
