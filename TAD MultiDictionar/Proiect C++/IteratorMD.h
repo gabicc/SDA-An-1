@@ -16,8 +16,10 @@ private:
 	//contine o referinta catre containerul pe care il itereaza
 	const MD& md;
 
+	LDI<TValoare> empty;
 	IteratorLDI<std::pair<TCheie, LDI<TValoare>*>> itChei;
 	IteratorLDI<TValoare> itValori;
+
 
 	/* aici e reprezentarea  specifica a iteratorului */
 

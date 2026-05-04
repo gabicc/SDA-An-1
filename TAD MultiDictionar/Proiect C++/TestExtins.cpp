@@ -285,6 +285,7 @@ void testIterator() { // nu stim reprezentarea MD, putem testa doar anumite lucr
 	while (im5.valid()) {
 		TElem e = im5.element();
 		elemente.push_back(e);
+		//cout << e.first << " " << e.second << endl;
 		im5.urmator();
 	}
 

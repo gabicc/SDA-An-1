@@ -27,11 +27,11 @@ private:
 
 	//constructorul primeste o referinta catre Container
 	//iteratorul va referi primul element din container
-	IteratorLDI(const LDI<T>& m): multime(m), curent(m.head) {
+	IteratorLDI(const LDI<T>& m): multime(&m), curent(m.head) {
 	}
 
 	//contine o referinta catre containerul pe care il itereaza
-	const LDI<T>& multime;
+	const LDI<T>* multime;
 	/* aici e reprezentarea  specifica a iteratorului */
 	Nod<T>* curent;
 
@@ -39,7 +39,7 @@ public:
 
 		//reseteaza pozitia iteratorului la inceputul containerului
 		void prim() {
-			this->curent = this->multime.head;
+			this->curent = this->multime->head;
 		}
 
 		//muta iteratorul in container
@@ -68,8 +68,9 @@ public:
 			throw IteratorException("Invalid position to return");
 		}
 
-		IteratorLDI<T> operator=(const IteratorLDI<T>& ot) {
+		IteratorLDI<T>& operator=(const IteratorLDI<T>& ot) {
 			if (this != &ot) {
+				this->multime = ot.multime;
 				this->curent = ot.curent;
 			}
 			return *this;

@@ -48,12 +48,14 @@ template <typename T> class LDI {
 		//adauga un element in multime
 		//returneaza adevarat daca elementul a fost adaugat (nu exista deja in multime)
 		bool adauga(T elem) {
+			/*
 			Nod<T>* curent = this->head;
 			while (curent != NULL) {
 				if (curent->val == elem)
 					return false;
 				curent = curent->next;
 			}
+			*/
 			Nod<T>* nou = new Nod<T>(elem, NULL, this->tail);
 			if (this->tail == NULL)
 				this->head = nou;
