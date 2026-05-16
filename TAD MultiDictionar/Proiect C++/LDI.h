@@ -19,10 +19,11 @@ public:
 	Nod() {};
 	Nod(T val, int next = -1, int prev = -1): val(val), next(next), prev(prev){}
 	virtual ~Nod(){};
-	void operator=(const Nod<T>& other) {
+	Nod<T>& operator=(const Nod<T>& other) {
 		this->val = other.val;
 		this->next = other.next;
 		this->prev = other.prev;
+		return *this;
 	}
 };
 
@@ -55,9 +56,15 @@ template <typename T> class LDI {
 		//adauga un element in multime
 		//returneaza adevarat daca elementul a fost adaugat (nu exista deja in multime)
 		bool adauga(T elem) {
-			for (int i = this->head; i < this->size; i++) {
-				if (this->elements[i].val == elem)
+			// for (int i = this->head; i < this->dimm; i++) {
+			// 	if (this->elements[i].val == elem)
+			// 		return false;
+			// }
+			auto it = this->iterator();
+			while (it.valid()) {
+				if (it.element() == elem)
 					return false;
+				it.urmator();
 			}
 			if (this->size == this->capacity) {
 				//TODO check if we should compact the elements
@@ -66,6 +73,8 @@ template <typename T> class LDI {
 				for (int i = 0; i< this->size; i++) {
 					elemNou[i] = this->elements[i];
 				}
+				delete[] this->elements;
+				this->elements = elemNou;
 			}
 			Nod<T> n(elem, -1, this->tail);
 			this->elements[this->tail].next = this->size;

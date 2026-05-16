@@ -36,6 +36,13 @@ public:
 			delete values;
 		this->values = newValues;
 	}
+
+	MDPair& operator=(const MDPair& other) {
+		this->key = other.key;
+		if (other.values != NULL)
+			this->values = other.values;
+		return *this;
+	}
 	bool operator==(const MDPair& other) {
 		return this->key == other.key && *(this->values) == *(other.values);
 	}
