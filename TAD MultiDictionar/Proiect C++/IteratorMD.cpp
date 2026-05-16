@@ -11,7 +11,7 @@ IteratorMD::IteratorMD(const MD& _md):
 {
 	itChei.prim();
 	if (itChei.valid()) {
-		itValori = itChei.element().second->iterator();
+		itValori = itChei.element().getValues()->iterator();
 		//itValori.prim();
 	}
 }
@@ -25,7 +25,7 @@ IteratorMD::IteratorMD(const MD& _md):
 TElem IteratorMD::element() const{
 	if (this->valid()) {
 		//cout << "Cheie: " << itChei.element().first << " Valoare: " << itValori.element() << endl;
-		return pair<TCheie, TValoare>(itChei.element().first, itValori.element());
+		return pair<TCheie, TValoare>(itChei.element().getKey(), itValori.element());
 	}
 	else {
 		throw IteratorException("Invalid element");
@@ -47,7 +47,7 @@ void IteratorMD::urmator() {
 	while (!itValori.valid() && itChei.valid()) {
 		itChei.urmator();
 		if (itChei.valid()) {
-			itValori = itChei.element().second->iterator();
+			itValori = itChei.element().getValues()->iterator();
 		}
 	}
 	/*if (itValori.valid()) {
@@ -75,7 +75,7 @@ void IteratorMD::prim() {
 	itChei.prim();
 
 	if (itChei.valid()) {
-		itValori = itChei.element().second->iterator();
+		itValori = itChei.element().getValues()->iterator();
 	}
 	else {
 		itValori = empty.iterator();

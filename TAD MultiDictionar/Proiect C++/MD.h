@@ -12,13 +12,46 @@ typedef std::pair<TCheie, TValoare> TElem;
 
 class IteratorMD;
 
+class MDPair {
+private:
+	TCheie key;
+	LDI<TValoare>* values;
+public:
+	MDPair(): key{0}, values{NULL} {};
+	MDPair(TCheie key, LDI<TValoare>* values): key{key}, values{values} {};
+	virtual ~MDPair() {
+
+	};
+	TCheie getKey() const {
+		return this->key;
+	}
+	LDI<TValoare>* getValues() const {
+		return this->values;
+	}
+	void setKey(TCheie newKey) {
+		this->key = newKey;
+	}
+	void setValues(LDI<TValoare>* newValues) {
+		if (this->values != NULL)
+			delete values;
+		this->values = newValues;
+	}
+	bool operator==(const MDPair& other) {
+		return this->key == other.key && *(this->values) == *(other.values);
+	}
+
+	bool operator!=(const MDPair& other) {
+		return !(*this==other);
+	}
+};
+
 class MD
 {
 	friend class IteratorMD;
 
 private:
 	// map<TCheie, vector<TValoare>> multidict;
-	LDI<std::pair<TCheie, LDI<TValoare>*>> multidict;
+	LDI<MDPair> multidict;
 
 public:
 	// constructorul implicit al MultiDictionarului

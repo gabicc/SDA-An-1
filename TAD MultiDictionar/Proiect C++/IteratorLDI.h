@@ -27,13 +27,13 @@ private:
 
 	//constructorul primeste o referinta catre Container
 	//iteratorul va referi primul element din container
-	IteratorLDI(const LDI<T>& m): multime(&m), curent(m.head) {
+	IteratorLDI(const LDI<T>* m): multime(m), curent(m->head) {
 	}
 
 	//contine o referinta catre containerul pe care il itereaza
 	const LDI<T>* multime;
 	/* aici e reprezentarea  specifica a iteratorului */
-	Nod<T>* curent;
+	int curent;
 
 public:
 
@@ -46,7 +46,7 @@ public:
 		// arunca exceptie daca iteratorul nu e valid
 		void urmator() {
 			if (this->valid()) {
-				curent = curent->next;
+				curent = this->multime->elements[curent].next;
 			}
 			else {
 				throw IteratorException("Invalid position for the next element");
@@ -55,7 +55,7 @@ public:
 
 		//verifica daca iteratorul e valid (indica un element al containerului)
 		bool valid() const {
-			if (curent == NULL)
+			if (curent == -1)
 				return false;
 			return true;
 		}
@@ -64,7 +64,7 @@ public:
 		//arunca exceptie daca iteratorul nu e valid
 		T element() const {
 			if (this->valid())
-				return curent->val;
+				return this->multime->elements[curent].val;
 			throw IteratorException("Invalid position to return");
 		}
 

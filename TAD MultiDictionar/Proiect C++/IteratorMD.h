@@ -17,7 +17,7 @@ private:
 	const MD& md;
 
 	LDI<TValoare> empty;
-	IteratorLDI<std::pair<TCheie, LDI<TValoare>*>> itChei;
+	IteratorLDI<MDPair> itChei;
 	IteratorLDI<TValoare> itValori;
 
 

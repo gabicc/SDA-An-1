@@ -11,35 +11,35 @@ MD::MD() {
 
 
 void MD::adauga(TCheie c, TValoare v) {
-	IteratorLDI<std::pair<TCheie, LDI<TValoare>*>> it = multidict.iterator();
+	IteratorLDI<MDPair> it = multidict.iterator();
 	it.prim();
 	while (it.valid()) {
 		//fiecare element returnat de iterator trebuie sa fie in multime
-		std::pair<TCheie, LDI<TValoare>*> e = it.element();
-		if (e.first == c) {
-			e.second->adauga(v);
+		MDPair e = it.element();
+		if (e.getKey() == c) {
+			e.getValues()->adauga(v);
 			return;
 		}
 		it.urmator();
 	}
 	LDI<TValoare>* valori = new LDI<TValoare>();
 	valori->adauga(v);
-	std::pair<TCheie, LDI<TValoare>*> pereche(c, valori);
+	MDPair pereche(c, valori);
 	multidict.adauga(pereche);
 }
 
 
 bool MD::sterge(TCheie c, TValoare v) {
-	IteratorLDI<std::pair<TCheie, LDI<TValoare>*>> it = multidict.iterator();
+	IteratorLDI<MDPair> it = multidict.iterator();
 	it.prim();
 	while (it.valid()) {
 		//fiecare element returnat de iterator trebuie sa fie in multime
-		std::pair<TCheie, LDI<TValoare>*> e = it.element();
-		if (e.first == c) {
+		MDPair e = it.element();
+		if (e.getKey() == c) {
 			//e.second.adauga(v);
-			bool b = e.second->sterge(v);
+			bool b = e.getValues()->sterge(v);
 			if (b == true) {
-				if (e.second->vida() == true) {
+				if (e.getValues()->vida() == true) {
 					multidict.sterge(e);
 				}
 			}
@@ -52,14 +52,14 @@ bool MD::sterge(TCheie c, TValoare v) {
 
 
 vector<TValoare> MD::cauta(TCheie c) const {
-	IteratorLDI<std::pair<TCheie, LDI<TValoare>*>> it = multidict.iterator();
+	IteratorLDI<MDPair> it = multidict.iterator();
 	it.prim();
 	while (it.valid()) {
 		//fiecare element returnat de iterator trebuie sa fie in multime
-		std::pair<TCheie, LDI<TValoare>*> e = it.element();
-		if (e.first == c) {
+		MDPair e = it.element();
+		if (e.getKey() == c) {
 			vector<TValoare> valori;
-			IteratorLDI<TValoare> it_valori = e.second->iterator();
+			IteratorLDI<TValoare> it_valori = e.getValues()->iterator();
 			it_valori.prim();
 			while(it_valori.valid()) {
 				TValoare val = it_valori.element();
@@ -75,13 +75,13 @@ vector<TValoare> MD::cauta(TCheie c) const {
 
 
 int MD::dim() const {
-	IteratorLDI<std::pair<TCheie, LDI<TValoare>*>> it = multidict.iterator();
+	IteratorLDI<MDPair> it = multidict.iterator();
 	it.prim();
 	int cont = 0;
 	while (it.valid()) {
 		//fiecare element returnat de iterator trebuie sa fie in multime
-		std::pair<TCheie, LDI<TValoare>*> e = it.element();
-			IteratorLDI<TValoare> it_valori = e.second->iterator();
+		MDPair e = it.element();
+			IteratorLDI<TValoare> it_valori = e.getValues()->iterator();
 			it_valori.prim();
 			while(it_valori.valid()) {
 				cont++;
