@@ -82,7 +82,7 @@ template <typename T> class LDI {
 			this->size++;
 			this->tail = this->size -1;
 			if (this->head == -1) {
-				this->head = 0;
+				this->head = this->tail;
 			}
 			this->dimm++;
 			return true;
@@ -91,8 +91,11 @@ template <typename T> class LDI {
 		//sterge un element din multime
 		//returneaza adevarat daca elementul a existat si a fost sters
 		bool sterge(T elem) {
+			if (head == -1) {
+				return false;
+			}
 			int curent = head;
-			while (this->elements[curent].val != elem && this->elements[curent].next != -1) {
+			while (this->elements[curent].val != elem && curent != -1) {
 				curent = this->elements[curent].next;
 			}
 			if (curent == -1) {

@@ -50,23 +50,6 @@ void IteratorMD::urmator() {
 			itValori = itChei.element().getValues()->iterator();
 		}
 	}
-	/*if (itValori.valid()) {
-		itValori.urmator();
-		if (!itValori.valid()) {
-			if (itChei.valid()) {
-				itChei.urmator();
-				if (itChei.valid()) {
-					itValori = itChei.element().second->iterator();
-					itValori.prim();
-				}
-				// else {
-				// 	throw IteratorException("Invalid urmator");
-				// }
-
-			}
-		}
-	}
-	*/
 }
 
 void IteratorMD::prim() {

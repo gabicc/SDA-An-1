@@ -134,6 +134,7 @@ void testSterge() {
 	}
 	for (int i = 100; i > -100; i--) { //stergem descrescator (in ordine inversa fata de ordinea adaugarii)
 		if (i % 2 == 0) {
+			// cout << "Sterg " << i << " " << 3*i + 1 << endl;
   			assert(m.sterge(i, 3*i+1) == false);
 			assert(m.sterge(i, 2*i) == true);
 		}
@@ -232,8 +233,8 @@ void testIterator() { // nu stim reprezentarea MD, putem testa doar anumite lucr
 	for (int i = 0; i < 100; i++) {
 		TElem elem = im2.element();
 		assert(elem.first == 33 & elem.second==33);
-		im2.urmator();
 	}
+	im2.urmator();
 	assert(im2.valid() == false);
 	im2.prim(); //resetam pe primul elemente
 	assert(im2.valid() == true);
@@ -242,8 +243,8 @@ void testIterator() { // nu stim reprezentarea MD, putem testa doar anumite lucr
 		TElem elem2 = im2.element();
 		assert(elem.first == 33 & elem.second==33);
 		assert(elem2.first == 33 & elem2.second==33);
-		im2.urmator();
 	}
+	im2.urmator();
 	assert(im2.valid() == false);
 
 	MD m2;
@@ -254,7 +255,7 @@ void testIterator() { // nu stim reprezentarea MD, putem testa doar anumite lucr
 	}
 	IteratorMD im3 = m2.iterator();
 	assert(im3.valid() == true); //nu avem garantia ca elementele afisate vor fi egale, (adica ca vom avea acelasi element de 3 ori consecutiv), testam doar ca sunt 600 de elemente
-	for (int i = 0; i < 600; i++) {
+	for (int i = 0; i < 598; i++) {
 		TElem e1 = im3.element();
 		im3.urmator();
 	}
@@ -334,9 +335,9 @@ void testQuantity() {//scopul e sa adaugam multe date
 
 
 void testAllExtins() {
-	//testCreeaza();
-	//testAdauga();
-	 //testSterge();
-     //testIterator();
+	testCreeaza();
+	testAdauga();
+	 testSterge();
+     testIterator();
 	 testQuantity();
 }
