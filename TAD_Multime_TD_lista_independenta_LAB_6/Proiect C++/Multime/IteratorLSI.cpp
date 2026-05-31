@@ -5,15 +5,15 @@
 #include "IteratorLSI.h"
 
 
-IteratorLSI::IteratorLSI(const LSI& lsi): lista{lsi} {
+IteratorLSI::IteratorLSI(LSI* lsi): lista{lsi} {
     /* de adaugat */
-    current = this->lista.head;
+    current = this->lista->head;
 }
 
 
 void IteratorLSI::prim() {
     /* de adaugat */
-    Nod* currNod = this->lista.head;
+    Nod* currNod = this->lista->head;
 }
 
 

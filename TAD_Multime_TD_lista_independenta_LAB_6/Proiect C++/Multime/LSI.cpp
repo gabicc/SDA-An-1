@@ -4,6 +4,8 @@
 
 #include "LSI.h"
 
+#include "IteratorLSI.h"
+
 LSI::~LSI() {
     Nod* currNod = this->head;
     while (currNod != NULL) {
@@ -11,4 +13,8 @@ LSI::~LSI() {
         delete currNod;
         currNod = nextNode;
     }
+}
+
+IteratorLSI LSI::iterator(){
+    return IteratorLSI(this);
 }

@@ -26,10 +26,10 @@ private:
 
     //constructorul primeste o referinta catre Container
     //iteratorul va referi primul element din container
-    IteratorLSI(const LSI& m);
+    IteratorLSI(LSI* m);
 
     //contine o referinta catre containerul pe care il itereaza
-    const LSI& lista;
+    LSI* lista;
     /* aici e reprezentarea  specifica a iteratorului */
     Nod* current;
 
@@ -48,6 +48,12 @@ public:
     //returneaza valoarea elementului din container referit de iterator
     //arunca exceptie daca iteratorul nu e valid
     TElem element() const;
+
+    IteratorLSI& operator=(const IteratorLSI& other) {
+        this->lista = other.lista;
+        this->current = other.current;
+        return *this;
+    }
 };
 
 

@@ -19,6 +19,8 @@ public:
 
 };
 
+class IteratorLSI;
+
 class LSI {
     friend class IteratorLSI;
 private:
@@ -27,6 +29,7 @@ private:
 public:
     LSI() {
         head = NULL;
+        size = 0;
     };
     ~LSI();
     int getSize() const {
@@ -77,6 +80,7 @@ public:
         }
         return false;
     }
+    IteratorLSI iterator();
 
 };
 
