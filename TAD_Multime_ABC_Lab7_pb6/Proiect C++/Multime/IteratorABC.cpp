@@ -23,10 +23,20 @@ void IteratorABC::urmator() {
     }
     if (current->dr != NULL) {
         current = current->dr;
-
+        while (current->st != NULL) {
+            parinti.push(current);
+            current = current->st;
+        }
     }
-    else if (!parinti.empty()) {
-        Nod* parinte = parinti.top();
+    else {
+        if (!parinti.empty()) {
+            Nod* parinte = parinti.top();
+            parinti.pop();
+            current = parinte;
+        }
+        else {
+            current = NULL;
+        }
     }
 }
 

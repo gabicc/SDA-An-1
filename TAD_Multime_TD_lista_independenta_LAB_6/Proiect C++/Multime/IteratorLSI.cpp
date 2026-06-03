@@ -13,7 +13,8 @@ IteratorLSI::IteratorLSI(LSI* lsi): lista{lsi} {
 
 void IteratorLSI::prim() {
     /* de adaugat */
-    Nod* currNod = this->lista->head;
+    //Nod* currNod = this->lista->head;
+    current = this->lista->head;
 }
 
 

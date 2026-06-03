@@ -43,10 +43,16 @@ bool ABC::adauga(TComparabil e) {
 
 bool ABC::stergeRec(TComparabil e, Nod* nod, Nod* parinte) {
     if (nod->val >e) {
-        return stergeRec(e, nod->st, nod);
+        if (nod->st != NULL)
+            return stergeRec(e, nod->st, nod);
+        else
+            return false;
     }
     else if (nod->val < e) {
-        return stergeRec(e, nod->dr, nod);
+        if (nod->dr != NULL)
+            return stergeRec(e, nod->dr, nod);
+        else
+            return false;
     }
     else {// nod->val == e
         size--;
@@ -91,6 +97,7 @@ bool ABC::sterge(TComparabil e) {
     if (rad == NULL)
         return false;
     if (rad->val == e) {
+        size--;
         if (rad->st == NULL && rad->dr == NULL) {
             delete rad;
             rad = NULL;
@@ -119,10 +126,16 @@ bool ABC::sterge(TComparabil e) {
         return true;
     }
     else if (rad->val > e) {
-        return stergeRec(e, rad->st, rad);
+        if (rad->st != NULL)
+            return stergeRec(e, rad->st, rad);
+        else
+            return false;
     }
     else {
-        return stergeRec(e, rad->dr, rad);
+        if (rad->dr != NULL)
+            return stergeRec(e, rad->dr, rad);
+        else
+            return false;
     }
 }
 
